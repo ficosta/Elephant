@@ -1,0 +1,79 @@
+{% extends "default.html" %}
+{% load static %}
+{% block css %}
+  <link href="https://vjs.zencdn.net/7.1.0/video-js.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/rangeslider.css' %}"/>
+{% endblock %}
+{% block js %}
+<script src="https://vjs.zencdn.net/7.1.0/video.js"></script>
+ <!-- rangeslider -->
+<script src="{% static 'js/rangeslider.js' %}"></script>
+<script src="{% static 'js/video.js' %}"></script>
+<!--  <script src="{% static 'js/video-js/5.8.7/video.js' %}"></script> -->
+{% endblock %}
+
+{% block content %}
+  <div class="col-md-9">
+    <div class="card ">
+      <div class="card-header ">
+        <h4 class="card-title">{{clip.channel.name}}</h4>
+        <p class="card-category">{{clip.recordDate}}</p>
+      </div>
+      <div class="card-body ">
+        <div align="center" >
+
+          <video id="preview-player" class="video-js vjs-default-skin" controls preload="auto" poster="http://vjs.zencdn.net/v/oceans.png" data-setup='{"fluid": true, "autoplay": false, "preload": "auto"}'>
+              <source src="{{ clip.lowresURL }}" type="video/mp4" >
+              <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+          </video>
+          </div>
+        </div>
+        <div class="card-footer">
+              <button type="button" id="play-pause" class="btn btn-danger"><i class="fas fa-play"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card ">
+        <div class="card-header ">
+          <h4 class="card-title">BUSCAR</h4>
+        </div>
+        <div class="card-body ">
+          <form method="post">
+            {% csrf_token %}
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                          <label>Dia</label>
+                          {% if date %}
+                          <input type="date" name="date" class="form-control" value="{{ date }}">
+                          {% else %}
+                            <input type="date" name="date" class="form-control" value="{% now "Y-m-d" %}">
+                          {% endif %}
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                          <label>Hora</label>
+                          {% if time %}
+                          <input type="time" name="time" class="form-control" value="{{ time }}">
+                          {% else %}
+                            <input type="time" name="time" class="form-control" value="{% now "H:i" %}">
+                          {% endif %}
+                      </div>
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-danger btn-fill pull-right"><i class="fas fa-search"></i> Buscar</button>
+              <div class="clearfix"></div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <pre> {% filter force_escape %} {% debug %} {% endfilter %} </pre>
+  </div>
+  {% endblock %}
