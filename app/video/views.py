@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from .models import Channel, Clip
 from datetime import datetime
 
@@ -12,7 +12,7 @@ def lista_canais(request):
 
 
 def video(request, channel=None, date=None, time=None):
-    if channel == None:
+    if channel is None:
         HttpResponseRedirect(reverse('video:lista_canais'))
     else:
         if request.method == 'POST':
