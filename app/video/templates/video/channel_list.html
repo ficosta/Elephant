@@ -1,0 +1,38 @@
+{% extends "default.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<table class="table">
+    <thead class="thead-inverse">
+    <tr>
+        <th>Nome</th>
+        <th>HiRes lifetime</th>
+        <th>LowRes lifetime</th>
+        <th>Status</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for channel in channels %}
+    <tr>
+        <td>
+            {{ channel.name }}
+        </td>
+        <td>{{ channel.hiresLifetime }}</td>
+        <td>{{ channel.lowresLifetime }}</td>
+        <td>
+            {% if channel.status %}
+            <span class="badge badge-success">Habilitado</span>
+            {% else %}
+            <span class="badge badge-primary">Desabilitado</span>
+            {% endif %}
+        </td>
+        <td>
+            <a class="btn btn-primary" href="{% url 'video:channel_update' channel.slug  %}"><span class="glyphicon glyphicon-pencil">Edit</span></a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

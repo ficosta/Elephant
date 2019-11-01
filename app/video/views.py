@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-
+from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .models import Channel, Clip
@@ -7,41 +8,24 @@ from datetime import datetime
 from .forms import ChannelForm
 
 
-def list_channels(request):
-    channels = Channel.objects.all()
+class ChannelList(ListView):
+    template_name = 'video/channel_list.html'
+    model = Channel
+    context_object_name = "channels"
 
-    return render(request, 'video/lista_canais.html', {'title': 'Lista de Canais', 'channels': channels})
-
-
-def channels(request):
-    channels = Channel.objects.all()
-
-    new_channel = None
-
-    if request.method == 'POST':
-        # Um novo post será criado
-        channel_form = ChannelForm(data=request.POST)
-        if channel_form.is_valid():
-            new_channel = channel_form.save()
-    else:
-        channel_form = ChannelForm()
-
-    return render(request, 'video/channels.html', {'channels': channels,
-                                                   'channel_form': channel_form,
-                                                   'new_channel': new_channel})
+class ChannelUpdate(UpdateView):
+    template_name = "video/channel_form.html"
+    model = Channel
+    fields = '__all__'
 
 
-def channel_edit(request, pk):
-    channel = get_object_or_404(Channel, pk=pk)
-    if request.method == "POST":
-        channel_form = ChannelForm(request.POST, instance=channel)
-        if channel_form.is_valid():
-            channel = channel_form.save()
-            return render('post_detail', pk=channel.pk)
-    else:
-        form = ChannelForm(instance=channel)
-    return render(request, 'blog/channel_edit.html', {'channel_form': channel_form})
 
+class ChannelCreate(CreateView):
+    model = Channel
+    fields = '__all__'
+
+class ChannelDelete(DeleteView):
+    model = Channel
 
 def video(request, channel=None, date=None, time=None):
     if channel is None:

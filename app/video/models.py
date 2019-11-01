@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 
 CHANNEL_STATUS_CHOICES = (
     (0, 'Desabilitado'),
@@ -16,7 +17,7 @@ CLIP_STATUS_CHOICES = (
 
 class Channel(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    slug = models.CharField(max_length=10, unique=True)
+    slug = models.SlugField()
     hiresLifetime = models.PositiveSmallIntegerField(default=0)
     lowresLifetime = models.PositiveSmallIntegerField(default=0)
     logo = models.ImageField(upload_to='logo/', blank=True)
@@ -25,6 +26,9 @@ class Channel(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Channel, self).save(*args, **kwargs)
 
 class Clip(models.Model):
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE, related_name='clips')

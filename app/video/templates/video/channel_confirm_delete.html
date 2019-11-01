@@ -1,0 +1,9 @@
+{% extends "default.html" %}
+{% block content %}
+<h1>Apagar canal?</h1>
+<form  method="post">
+{% csrf_token %}
+Você deseja apagar esse canal?
+<input  type="submit"  value="Apagar"  />
+</form>
+{% endblock %}
