@@ -14,7 +14,6 @@ CLIP_STATUS_CHOICES = (
     (3, 'Hires e Lowres disponivel'),
 )
 
-
 class Channel(models.Model):
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField()
@@ -29,6 +28,7 @@ class Channel(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Channel, self).save(*args, **kwargs)
+
 
 class Clip(models.Model):
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE, related_name='clips')

@@ -1,31 +1,40 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .models import Channel, Clip
 from datetime import datetime
-from .forms import ChannelForm
 
 
 class ChannelList(ListView):
     template_name = 'video/channel_list.html'
     model = Channel
-    context_object_name = "channels"
+    context_object_name = 'channels'
+
 
 class ChannelUpdate(UpdateView):
-    template_name = "video/channel_form.html"
+    template_name = 'video/channel_form.html'
     model = Channel
-    fields = '__all__'
-
+    fields = ['name', 'hiresLifetime', 'lowresLifetime', 'logo', 'status']
+    success_url = '/channel/list/'
 
 
 class ChannelCreate(CreateView):
     model = Channel
-    fields = '__all__'
+    template_name = 'video/channel_form.html'
+    fields = ['name', 'hiresLifetime', 'lowresLifetime', 'logo', 'status']
+    success_url = '/channel/list/'
+
 
 class ChannelDelete(DeleteView):
     model = Channel
+    success_url = '/channel/list/'
+
+
+def dashboard(request):
+    return render(request, 'video/dashboard.html')
+
 
 def video(request, channel=None, date=None, time=None):
     if channel is None:
