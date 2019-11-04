@@ -17,19 +17,19 @@ class ChannelUpdate(UpdateView):
     template_name = 'video/channel_form.html'
     model = Channel
     fields = ['name', 'hiresLifetime', 'lowresLifetime', 'logo', 'status']
-    success_url = '/channel/list/'
+    success_url = '/video/channel/list/'
 
 
 class ChannelCreate(CreateView):
     model = Channel
     template_name = 'video/channel_form.html'
     fields = ['name', 'hiresLifetime', 'lowresLifetime', 'logo', 'status']
-    success_url = '/channel/list/'
+    success_url = '/video/channel/list/'
 
 
 class ChannelDelete(DeleteView):
     model = Channel
-    success_url = '/channel/list/'
+    success_url = '/video/channel/list/'
 
 
 def dashboard(request):

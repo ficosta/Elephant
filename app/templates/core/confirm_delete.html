@@ -1,0 +1,9 @@
+{% extends "default.html" %}
+{% block content %}
+<h1>Remover notificação?</h1>
+<form  method="post">
+{% csrf_token %}
+Você deseja remover essa notificação?
+<input  type="submit"  value="Apagar"  />
+</form>
+{% endblock %}

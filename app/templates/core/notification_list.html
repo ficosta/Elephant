@@ -1,0 +1,34 @@
+{% extends "default.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead class="thead-inverse">
+        <tr>
+            <th>Usuário</th>
+            <th>Descrição</th>
+            <th>Style</th>
+            <th>Data</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for notification in notifications %}
+            <tr>
+                <td>{{ notification.user }}</td>
+                <td>{{ notification.description }}</td>
+                <td>{{ notification.style }}</td>
+                <td>{{ notification.createdAt }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'core:log_update' log.id %}"><i
+                            class="fa fa-pencil"></i></a>
+                    <a class="btn btn-primary" href="{% url 'core:log_delete' log.id %}"><i
+                            class="fa fa-trash-o"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="{% url 'core:notification_create' %}"><i class="fa fa-plus"></i></a>
+{% endblock %}

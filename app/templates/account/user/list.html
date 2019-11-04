@@ -1,24 +1,30 @@
-{% extends "base.html" %}
-{% load thumbnail %}
-
-{% block title %}People{% endblock %}
+{% extends "default.html" %}
 
 {% block content %}
-  <h1>People</h1>
-  <div id="people-list">
+<table class="table">
+    <thead class="thead-inverse">
+    <tr>
+        <th>Username</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
     {% for user in users %}
-      <div class="user">
-        <a href="{{ user.get_absolute_url }}">
-          {% thumbnail user.profile.photo "180x180" crop="100%" as im %}
-            <img src="{{ im.url }}">
-          {% endthumbnail %}
-        </a>
-        <div class="info">
-          <a href="{{ user.get_absolute_url }}" class="title">
-            {{ user.get_full_name }}
-          </a>
-        </div>
-      </div>
+    <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.name }}</td>
+        <td>
+            <a class="btn btn-primary" href="{{ user.id }}"><i class="fa fa-pencil"></i></a>
+            <a class="btn btn-primary" href="{{ user.id }}"><i class="fa fa-trash-o"></i></a>
+        </td>
+    </tr>
     {% endfor %}
-  </div>
+    </tbody>
+</table>
+    <a class="btn btn-primary" href="{% url 'account:user_list' %}"><i class="fa fa-plus"></i></a>
 {% endblock %}

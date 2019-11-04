@@ -34,9 +34,13 @@
                 Análises</a>
             <i href="#" class="list-group-item list-group-item-action bg-light">Admin</i>
             <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fa fa-building"></i> Companies</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fa fa-users"></i> Users</a>
+            <a href="{% url 'account:user_list' %}" class="list-group-item list-group-item-action bg-light"><i class="fa fa-users"></i> Users</a>
             <a href="{% url 'video:channel_list' %}" class="list-group-item list-group-item-action bg-light"><i
                     class="fa fa-television"></i> Channels</a>
+            <a href="{% url 'core:log_list' %}" class="list-group-item list-group-item-action bg-light"><i
+                    class="fa fa-file-text"></i>  Logs</a>
+            <a href="{% url 'core:notification_list' %}" class="list-group-item list-group-item-action bg-light"><i
+                    class="fa fa-bell"></i>  Notificações</a>
         </div>
     </div>
     <!-- /#sidebar-wrapper -->
