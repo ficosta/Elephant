@@ -4,8 +4,15 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import LoginForm, UserRegistrationForm, \
-                   UserEditForm, ProfileEditForm
-from .models import Profile
+    UserEditForm, ProfileEditForm
+from django.contrib.auth.models import User
+from django.views.generic import ListView
+
+
+class UserList(ListView):
+    template_name = 'account/user/list.html'
+    model = User
+    context_object_name = 'users'
 
 
 def user_login(request):
@@ -19,7 +26,7 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Authenticated '\
+                    return HttpResponse('Authenticated ' \
                                         'successfully')
                 else:
                     return HttpResponse('Disabled account')
