@@ -14,7 +14,6 @@ NOTIFICATION_STYLE_CHOICES = (
     (3, 'Information'),
 )
 
-
 class Log(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
     event = models.PositiveSmallIntegerField(choices=LOG_EVENT_CHOICES, default=0)
