@@ -8,13 +8,13 @@ from datetime import datetime
 
 
 class ChannelList(ListView):
-    template_name = 'video/channel_list.html'
+    template_name = 'channel_list.html'
     model = Channel
     context_object_name = 'channels'
 
 
 class ChannelUpdate(UpdateView):
-    template_name = 'video/channel_form.html'
+    template_name = 'channel_form.html'
     model = Channel
     fields = ['name', 'hiresLifetime', 'lowresLifetime', 'logo', 'status']
     success_url = '/video/channel/list/'
@@ -22,7 +22,7 @@ class ChannelUpdate(UpdateView):
 
 class ChannelCreate(CreateView):
     model = Channel
-    template_name = 'video/channel_form.html'
+    template_name = 'channel_form.html'
     fields = ['name', 'hiresLifetime', 'lowresLifetime', 'logo', 'status']
     success_url = '/video/channel/list/'
 
@@ -33,7 +33,7 @@ class ChannelDelete(DeleteView):
 
 
 def dashboard(request):
-    return render(request, 'video/dashboard.html')
+    return render(request, 'dashboard.html')
 
 
 def video(request, channel=None, date=None, time=None):
