@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -31,6 +32,12 @@ class ChannelDelete(DeleteView):
     model = Channel
     success_url = '/video/channel/list/'
 
+
+def ClipDetail(request, date, hour, channel_id):
+    model = Clip
+
+
+#Ordenar por data https://www.vinta.com.br/blog/2017/advanced-django-querying-sorting-events-date/
 
 def dashboard(request):
     return render(request, 'dashboard.html')

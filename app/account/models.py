@@ -15,6 +15,7 @@ PROFILE_ROLES_CHOICES = (
     (2, 'Nivel 3'),
 )
 
+
 class Company(models.Model):
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField()
