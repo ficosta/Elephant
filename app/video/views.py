@@ -33,8 +33,8 @@ class ChannelDelete(DeleteView):
     success_url = '/video/channel/list/'
 
 
-def ClipDetail(request, date, hour, channel_id):
-    model = Clip
+# # def ClipDetail(request, date, hour, channel_id):
+#     model = Clip
 
 
 #Ordenar por data https://www.vinta.com.br/blog/2017/advanced-django-querying-sorting-events-date/
