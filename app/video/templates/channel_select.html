@@ -1,0 +1,9 @@
+{% extends "default.html" %}
+{% block content %}
+    <h1>Selecione o canal</h1>
+    <form action="{%  url 'video:clip' %}" method="post">
+        {% csrf_token %}
+        {{ channelSelectForm.as_p }}
+        <input type="submit" value="Submit"/>
+    </form>
+{% endblock %}
