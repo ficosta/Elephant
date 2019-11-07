@@ -8,4 +8,4 @@ class ClipSearchForm(forms.Form):
 
 
 class ChannelSelectForm(forms.Form):
-    channels = forms.ChoiceField(choices=[(channel.id, channel.name) for channel in Channel.objects.filter(status=1)])
+    channels = forms.ChoiceField(choices=[(channel.slug, channel.name) for channel in Channel.objects.filter(status=1)])

@@ -37,27 +37,26 @@ class ChannelDelete(DeleteView):
 #     model = Clip
 
 def channelSelect(request):
-    context = {'channelSelectForm': ChannelSelectForm()}
-    return render(request, 'channel_select.html', context)
+    if request.method == 'POST':
+        form = ChannelSelectForm(request.POST)
+        if form.is_valid():
+            channel = request.POST.get('channels')
+            return redirect('video:channel', channel)
+    else:
+        context = {'channelSelectForm': ChannelSelectForm()}
+        return render(request, 'channel_select.html', context)
 
 
 # Ordenar por data https://www.vinta.com.br/blog/2017/advanced-django-querying-sorting-events-date/
 
-def dashboard(request):
-    return render(request, 'dashboard.html')
-
-
-def ClipSelect(request):
-    if request.method == 'POST':
-        form = ChannelSelectForm(request.POST)
-        print(form)
-        if form.is_valid():
-            channel = request.POST.get('channels')
-            print(channel)
-            clip = Clip.objects.filter(channel=channel).first()
-            print(clip)
-            context = {'channel': channel,
-                       'clip': clip}
-            return render(request, 'video_limpo.html', context=context)
-    else:
+def channel(request, slug=None):
+    if not slug:
         return redirect('video:channel_select')
+    else:
+        if request.method == 'POST':
+            #Busca pelo clip data/hora
+            pass
+        else:
+            #Busca ultimo video
+            context = {'slug': slug}
+            return render(request, 'video_limpo.html', context=context)

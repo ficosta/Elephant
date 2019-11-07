@@ -9,9 +9,7 @@ CHANNEL_STATUS_CHOICES = (
 
 CLIP_STATUS_CHOICES = (
     (0, 'Indisponivel'),
-    (1, 'Hires disponivel'),
-    (2, 'Lowres disponivel'),
-    (3, 'Hires e Lowres disponivel'),
+    (1, 'Disponivel'),
 )
 
 class Channel(models.Model):
