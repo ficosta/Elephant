@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect
 from .models import Channel, Clip
 from datetime import datetime
-from .forms import ChannelSelectForm
+from .forms import ChannelSelectForm, ClipSearchForm
 
 
 class ChannelList(ListView):
@@ -53,8 +53,9 @@ def channel(request, slug=None):
     if not slug:
         return redirect('video:channel_select')
     else:
+        form = ClipSearchForm()
         if request.method == 'POST':
-            #Busca pelo clip data/hora
+
             pass
         else:
             #Busca ultimo video
